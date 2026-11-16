@@ -8,7 +8,7 @@ export function ListingGrid({ listings, meta }: { listings: Listing[]; meta?: Me
   return (
     <ul className="grid grid-cols-2 gap-x-3 gap-y-6 sm:grid-cols-3 lg:grid-cols-4">
       {listings.map((l) => (
-        <li key={l.id}><ListingCard listing={l} meta={meta} /></li>
+        <li key={l.id} className="h-full"><ListingCard listing={l} meta={meta} /></li>
       ))}
     </ul>
   );

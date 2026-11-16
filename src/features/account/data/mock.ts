@@ -1,4 +1,4 @@
-// Demo user until auth + database exist. Money in minor units (cents).
+// Demo user until auth + database exist. Money in fils (100 fils = 1 AED).
 export const currentUser = {
   name: "Nijin Joy",
   handle: "nijin",
@@ -11,5 +11,5 @@ export const currentUser = {
   reviewCount: 32,
   stats: { listings: 12, sold: 47, bought: 18, followers: 156 },
   activity: { activeOrders: 2, wishlist: 9 },
-  seller: { balance: 23450, pendingPayout: 8900 },
+  seller: { balance: 86050, pendingPayout: 32500 },
 };

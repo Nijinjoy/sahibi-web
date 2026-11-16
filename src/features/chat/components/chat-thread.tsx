@@ -159,7 +159,7 @@ export function ChatThread({ conversation }: { conversation: Conversation }) {
         <form onSubmit={sendOffer} className="flex shrink-0 items-center gap-2 border-t border-border bg-surface/60 px-4 py-3">
           <span className="text-sm text-muted">Your offer</span>
           <div className="relative flex-1">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted">$</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs font-medium text-muted">AED</span>
             <input
               autoFocus
               inputMode="decimal"
@@ -167,7 +167,7 @@ export function ChatThread({ conversation }: { conversation: Conversation }) {
               onChange={(e) => setOffer(e.target.value.replace(/[^\d.]/g, ""))}
               placeholder={(item.price / 100 * 0.9).toFixed(0)}
               aria-label="Offer amount"
-              className="h-10 w-full rounded-full border border-border bg-background pl-7 pr-3 text-sm outline-none focus:border-brand"
+              className="h-10 w-full rounded-full border border-border bg-background pl-12 pr-3 text-sm outline-none focus:border-brand"
             />
           </div>
           <button type="button" onClick={() => setOffering(false)} className="px-2 text-sm text-muted">Cancel</button>

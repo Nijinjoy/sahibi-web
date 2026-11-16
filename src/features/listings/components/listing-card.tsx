@@ -17,8 +17,11 @@ export function ListingCard({ listing: l, meta = "location" }: Props) {
   const showBrand = l.brand && !l.title.toLowerCase().startsWith(l.brand.toLowerCase());
   const discount = l.originalPrice ? Math.round((1 - l.price / l.originalPrice) * 100) : 0;
   return (
-    <Link href={`/listings/${l.id}`} className="group block">
-      <div className={`relative aspect-[4/5] overflow-hidden rounded-2xl bg-gradient-to-br ${l.tint}`}>
+    <Link
+      href={`/listings/${l.id}`}
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[0_1px_3px_rgb(0_0_0/0.06)] transition hover:shadow-md active:scale-[0.98]"
+    >
+      <div className={`relative aspect-square overflow-hidden bg-gradient-to-br ${l.tint}`}>
         <span
           aria-hidden
           className="absolute inset-0 grid place-items-center text-6xl transition duration-300 group-hover:scale-110 md:text-7xl"
@@ -40,22 +43,26 @@ export function ListingCard({ listing: l, meta = "location" }: Props) {
         )}
         <LikeButton initialLikes={l.likes} className="absolute bottom-2 right-2" />
       </div>
-      <div className="mt-2 px-0.5">
-        <p className="flex items-baseline gap-1.5">
-          <span className="text-[17px] font-bold tracking-tight">{formatPrice(l.price)}</span>
-          {l.originalPrice && <span className="text-xs text-muted line-through">{formatPrice(l.originalPrice)}</span>}
+      <div className="flex flex-1 flex-col p-3">
+        <p className="flex min-w-0 items-baseline gap-1.5">
+          <span className="shrink-0 text-[17px] font-bold tracking-tight">{formatPrice(l.price)}</span>
+          {l.originalPrice && (
+            <span className="truncate text-xs text-muted line-through">{formatPrice(l.originalPrice)}</span>
+          )}
         </p>
         <p className="truncate text-[13px] text-foreground/80">{showBrand ? <span className="font-medium">{l.brand} · </span> : null}{l.title}</p>
-        <p className="mt-0.5 flex items-center gap-1 truncate text-xs text-muted">
+        <p className="mt-auto flex min-w-0 items-center gap-1 pt-1 text-xs text-muted">
           {meta === "distance" ? (
             <>
               <Navigation className="size-3 shrink-0 text-brand" aria-hidden />
-              <span className="font-medium text-foreground">{l.distanceKm.toFixed(1)} km</span> · {l.location}
+              <span className="truncate">
+                <span className="font-medium text-foreground">{l.distanceKm.toFixed(1)} km</span> · {l.location}
+              </span>
             </>
           ) : (
             <>
               <MapPin className="size-3 shrink-0" aria-hidden />
-              {l.location} · {l.postedAgo} ago
+              <span className="truncate">{l.location} · {l.postedAgo} ago</span>
             </>
           )}
         </p>

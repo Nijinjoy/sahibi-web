@@ -1,32 +1,26 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/section-header";
-import { CategoryRail } from "@/features/catalog/components/category-rail";
 import { ConditionGrid } from "@/features/catalog/components/condition-grid";
-import { NearbyHeader } from "@/features/catalog/components/nearby-header";
 import { PromoCarousel } from "@/features/catalog/components/promo-carousel";
-import { SellBanner } from "@/features/catalog/components/sell-banner";
-import { TrustStrip } from "@/features/catalog/components/trust-strip";
 import { ListingGrid, ListingRail } from "@/features/listings/components/listing-grid";
 import { justListed, nearbyListings } from "@/features/listings/data/mock";
 
 export default function HomePage() {
   return (
     <div className="-mt-6 space-y-8 md:mt-0 md:space-y-12">
-      <PromoCarousel />
+      {/* Tighter than the default section gap; the dots already separate it */}
+      <div className="mb-5 md:mb-8">
+        <PromoCarousel />
+      </div>
 
-      <section>
-        <SectionHeader title="Just Listed" subtitle="Fresh from sellers today" href="/search?sort=newest" />
+      <section className="mb-5 md:mb-8">
+        <SectionHeader title="Just Listed" href="/search?sort=newest" />
         <ListingRail listings={justListed} />
       </section>
 
       <section>
-        <SectionHeader title="Shop by Condition" />
-        <ConditionGrid />
-      </section>
-
-      <section>
-        <NearbyHeader />
+        <SectionHeader title="Nearby finds" href="/search?sort=distance" />
         <ListingGrid listings={nearbyListings} meta="distance" />
         <Link
           href="/search?sort=distance"
@@ -37,13 +31,9 @@ export default function HomePage() {
       </section>
 
       <section>
-        <SectionHeader title="Browse categories" href="/categories" />
-        <CategoryRail />
+        <SectionHeader title="Shop by Condition" />
+        <ConditionGrid />
       </section>
-
-      <SellBanner />
-
-      <TrustStrip />
     </div>
   );
 }

@@ -30,7 +30,7 @@ const slides: Slide[] = [
   {
     id: "delivery",
     eyebrow: "This week only",
-    title: "Free delivery on orders over $50",
+    title: "Free delivery on orders over AED 200",
     cta: "Start shopping",
     href: "/search",
     emoji: "🚚",
