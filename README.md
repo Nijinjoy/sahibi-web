@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sahbi
 
-## Getting Started
+Next.js app.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/                    # Routing only: pages, layouts, route handlers
+│   ├── (shop)/             # Public storefront (header + footer layout)
+│   │   ├── page.tsx        # /
+│   │   ├── search/         # /search
+│   │   ├── categories/[slug]/
+│   │   ├── listings/[id]/  # Item detail
+│   │   ├── sellers/[handle]/
+│   │   ├── categories/     # Index of all categories (+ [slug])
+│   │   ├── chats/          # Buyer ↔ seller messaging (+ [id] thread)
+│   │   ├── cart/  checkout/
+│   │   └── account/        # Customer area: orders, offers, wishlist, addresses, settings
+│   ├── (seller)/seller/    # Seller dashboard: listings (+ /new), sales, offers, payouts, shop settings
+│   ├── (auth)/             # /login, /register (minimal layout)
+│   ├── api/webhooks/       # Third-party callbacks (e.g. Stripe)
+│   ├── layout.tsx  error.tsx  not-found.tsx  robots.ts  sitemap.ts
+├── features/<domain>/      # Business logic, one folder per domain
+│   ├── components/         #   UI specific to this domain
+│   ├── actions.ts          #   Server Actions (mutations)
+│   ├── queries.ts          #   Data reads
+│   ├── schemas.ts          #   Validation
+│   └── types.ts
+├── components/
+│   ├── ui/                 # Generic primitives (Button, Input, Dialog…)
+│   └── layout/             # Site header, footer
+├── config/                 # App-wide constants (site.ts)
+├── lib/                    # Infrastructure: db client, auth, utils
+├── hooks/                  # Shared client hooks
+└── types/                  # Shared domain types (condition, statuses)
+```
 
-## Learn More
+Domains: `auth`, `chat`, `listings`, `catalog`, `search`, `cart`, `checkout`, `orders`, `offers`, `sellers`, `reviews`, `payments`.
 
-To learn more about Next.js, take a look at the following resources:
+### Rules
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/` stays thin: a page fetches through `features/*` and renders feature components.
+- A feature never imports from another feature's internals. Shared code moves to `components/`, `lib/` or `types/`.
+- Import with the `@/` alias (maps to `src/`).
+- `cacheComponents` is on: wrap runtime data (`params`, `cookies()`, uncached DB reads) in `<Suspense>` or use `"use cache"`.
+- Request interception (auth redirects) goes in `src/proxy.ts`. In Next 16 it replaces middleware.
+- Store money as integer minor units (cents). Format it with `formatPrice` from `@/lib/utils`.
