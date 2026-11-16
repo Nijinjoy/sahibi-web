@@ -4,7 +4,7 @@ import { CategoryNav } from "./header/category-nav";
 import { HeaderActions } from "./header/header-actions";
 import { SearchBar } from "./header/search-bar";
 
-export function SiteHeader() {
+export function SiteHeader({ showMobileSearch = true }: { showMobileSearch?: boolean }) {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 md:gap-6">
@@ -18,9 +18,11 @@ export function SiteHeader() {
           <HeaderActions cartCount={0} />
         </div>
       </div>
-      <div className="px-4 pb-3 md:hidden">
-        <SearchBar />
-      </div>
+      {showMobileSearch && (
+        <div className="px-4 pb-3 md:hidden">
+          <SearchBar />
+        </div>
+      )}
       <CategoryNav />
     </header>
   );

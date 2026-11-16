@@ -22,9 +22,9 @@ function OfferBubble({
 }) {
   const mine = message.from === "me";
   const statusStyle = {
-    pending: "bg-amber-500/15 text-amber-600 dark:text-amber-400",
-    accepted: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400",
-    declined: "bg-red-500/15 text-red-600 dark:text-red-400",
+    pending: "bg-amber-500/15 text-amber-600",
+    accepted: "bg-emerald-500/15 text-emerald-600",
+    declined: "bg-red-500/15 text-red-600",
   }[message.status];
 
   return (

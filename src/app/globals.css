@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
   --background: #ffffff;
   --foreground: #171717;
   --muted: #6b7280;
@@ -20,18 +21,6 @@
   --color-brand-foreground: var(--brand-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #a1a1aa;
-    --surface: #18181b;
-    --border: #27272a;
-    --brand: #10b981;
-    --brand-foreground: #052e16;
-  }
 }
 
 body {
