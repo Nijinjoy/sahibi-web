@@ -23,9 +23,10 @@ src/
 │   │   ├── listings/[id]/  # Item detail
 │   │   ├── sellers/[handle]/
 │   │   ├── categories/     # Index of all categories (+ [slug])
-│   │   ├── chats/          # Buyer ↔ seller messaging (+ [id] thread)
 │   │   ├── cart/  checkout/
-│   │   └── account/        # Customer area: orders, offers, wishlist, addresses, settings
+│   ├── (no-search)/        # Same shell, no mobile header search
+│   │   ├── chats/          # Buyer ↔ seller messaging (+ [id] thread)
+│   │   └── account/        # Customer area: orders, wishlist, addresses, settings
 │   ├── (seller)/seller/    # Seller dashboard: listings (+ /new), sales, offers, payouts, shop settings
 │   ├── (auth)/             # /login, /register (minimal layout)
 │   ├── api/webhooks/       # Third-party callbacks (e.g. Stripe)
